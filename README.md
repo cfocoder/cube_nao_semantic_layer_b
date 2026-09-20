@@ -7,7 +7,7 @@ This repository is the Nao Multi-project context for formal scenario **B**.
 - One read-only PostgreSQL connection named `direct_postgres`.
 - Nao may synchronize table, column, schema, and preview metadata from `retail`.
 - No Cube MCP or Cube semantic contract.
-- No Contoso business skill or `effective_business_days` rule.
+- No Contoso business skill or business-policy rule.
 - The agent may use the physical schema and generate read-only SQL.
 
 ## Project mapping
