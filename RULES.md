@@ -13,3 +13,6 @@ This project tests direct access to the physical PostgreSQL schema.
 7. Report the data route and relevant assumptions in the answer.
 
 The technical schema context is allowed. Business-policy context is deliberately absent.
+
+## First-turn response requirement
+Always answer the user's question in the current response and provide every requested field; if data is unavailable, state that explicitly without inventing values or deferring the answer to a follow-up.
