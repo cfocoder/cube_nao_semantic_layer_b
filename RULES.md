@@ -14,5 +14,15 @@ This project tests direct access to the physical PostgreSQL schema.
 
 The technical schema context is allowed. Business-policy context is deliberately absent.
 
+## Scoped Q006 rounding trial
+
+For the manual Q006 question, “What were the total online sales in 2009?”, only:
+
+- Use the `direct_postgres` connection and the available `retail.factonlinesales` schema.
+- Apply the year filter to `datekey` using the verified schema.
+- Round only the final aggregate to two decimal places: `ROUND(SUM(salesamount)::numeric, 2)`.
+- Do not round individual rows before summing; do not use `SUM(ROUND(salesamount::numeric, 2))`.
+- Do not apply this temporary trial rule to other questions, or change benchmark prompts, IDs, or golds.
+
 ## First-turn response requirement
 Always answer the user's question in the current response and provide every requested field; if data is unavailable, state that explicitly without inventing values or deferring the answer to a follow-up.
