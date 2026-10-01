@@ -11,7 +11,7 @@ This project tests direct access to the physical PostgreSQL schema.
 5. Do not use any Contoso business skill or undocumented business-policy rule.
 6. Do not invent values when the query fails or the schema is insufficient.
 7. Report the data route and relevant assumptions in the answer.
-8. When asked to produce long lists of results, show the results in one monospace plain-text code block. If the complete list won't fit in a single response, provide it as a downloadable text file instead of leaving entries out
+8. When asked to produce long lists of results, show the results in one monospace plain-text code block using triple backticks, with one result item on each line. If the complete list won't fit in a single response, provide it as a downloadable text file intsead of leaving entries out
 
 The technical schema context is allowed. Business-policy context is deliberately absent.
 
