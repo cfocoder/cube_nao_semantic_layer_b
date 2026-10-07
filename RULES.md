@@ -19,6 +19,13 @@ The technical schema context is allowed. Business-policy context is deliberately
 
 For every user-facing result that requires arithmetic over observed or explicitly provided numeric inputs, you **MUST** call the shared MCP `decimal_calculator.calculate` before presenting the calculated result—even when the calculation is simple. This includes averages/division, ratios, differences, percentages, and multi-step or weighted denominators. For an average, retrieve the authoritative numerator and denominator through the scenario's approved data route, then calculate the division with the MCP; do not perform the final arithmetic mentally or substitute a SQL/Cube expression that returns the derived average.
 
+### Precision and rounding for derived calculations (shared rule)
+
+- When an observed numeric value will be an input or intermediate value in a derived calculation, retrieve and use the full-precision value returned by this scenario's approved data route. Never use a rounded display value—including a Cube measure with the `Rounded2dp` suffix—as an input to a further calculation.
+- Keep the full-precision value through all calculator steps. Round only the final derived result for display at the precision requested. If a final monetary total is also requested, round that total separately for display; do not replace the full-precision calculation input with the displayed total.
+- If the approved route offers both full-precision and rounded measures, use the full-precision measure for the calculator and the rounded measure only for a separately displayed final monetary total. If it exposes only a rounded value, do not infer or reconstruct the hidden precision; report that the derived result cannot be verified from the available value.
+- For B, retrieve an unrounded aggregate from `direct_postgres` when it will feed another calculation. Apply the final-total rounding rule below only to a total reported as a final monetary answer, not to a value used as an intermediate input.
+
 Keep data semantics separate from arithmetic:
 
 - Use only this project's approved data route, specified above, to select, filter, and aggregate source rows and retrieve observed totals/counts. Do not send raw table rows to the calculator for database aggregation.
@@ -34,7 +41,7 @@ Example: for an ordinary weekday average, pass the actual observed amount and da
 For any question that asks for a final monetary total:
 
 - Use the `direct_postgres` connection and the verified `retail` schema.
-- Aggregate the source values at full precision, then round the final `SUM` to two decimal places. For PostgreSQL floating-point amount columns, use the equivalent of `ROUND(SUM(amount_column)::numeric, 2)`.
+- Aggregate the source values at full precision, then round the final `SUM` to two decimal places when reporting that monetary total as a final answer. For PostgreSQL floating-point amount columns, use the equivalent of `ROUND(SUM(amount_column)::numeric, 2)`.
 - Never round each source row before summing (for example, do not use `SUM(ROUND(amount_column::numeric, 2))`).
 - Keep full-precision values for ranking, filtering, thresholds, and other calculations that depend on exact values; this rounding rule is for final monetary totals only.
 - Do not apply this rule to counts, quantities, rates, or percentages. Preserve frozen prompts, IDs, and gold values unchanged.
