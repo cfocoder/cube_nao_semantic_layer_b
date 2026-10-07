@@ -4,7 +4,7 @@ This project tests direct access to the physical PostgreSQL schema.
 
 ## Required behavior
 
-1. Use only the `direct_postgres` connection for data access. `decimal_calculator.calculate` is the only permitted MCP, solely for arithmetic as specified below; it is not a data-access route.
+1. Use only the native `direct_postgres` database connection for data access, through Nao's `execute_sql` tool; set `database_id: "direct_postgres"`. `direct_postgres` is not an MCP server: never call `mcp_connect` or `mcp_call` for it. If `execute_sql` reports a connection/configuration error, report that failure instead of trying to connect to it as an MCP or switching routes. The only permitted MCP is `decimal_calculator.calculate`, solely for arithmetic as specified below; it is not a data-access route.
 2. Generate read-only queries only: `SELECT` and `WITH` statements.
 3. Use the synchronized `retail` schema and available columns; do not invent tables or fields.
 4. Do not use Cube, `cube_semantic`, `cube_query`, or any other data-access MCP. Use `decimal_calculator.calculate` as required by the section below, only for arithmetic over values already retrieved from `direct_postgres`; it cannot provide or change data.
