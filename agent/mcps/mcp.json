@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "decimal_calculator": {
+      "transport": "streamable-http",
+      "url": "http://calculator-mcp-private:9000/mcp",
+      "disabled": false,
+      "autoApprove": [],
+      "disabledTools": []
+    }
+  }
+}

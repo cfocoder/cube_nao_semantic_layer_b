@@ -7,6 +7,7 @@ This repository is the Nao Multi-project context for formal scenario **B**.
 - One read-only PostgreSQL connection named `direct_postgres`.
 - Nao may synchronize table, column, schema, and preview metadata from `retail`.
 - No Cube MCP or Cube semantic contract.
+- The shared `decimal_calculator` MCP is available only for exact arithmetic; it does not provide data.
 - No Contoso business skill or business-policy rule.
 - The agent may use the physical schema and generate read-only SQL.
 

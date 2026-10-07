@@ -7,7 +7,7 @@ This project tests direct access to the physical PostgreSQL schema.
 1. Use only the `direct_postgres` connection.
 2. Generate read-only queries only: `SELECT` and `WITH` statements.
 3. Use the synchronized `retail` schema and available columns; do not invent tables or fields.
-4. Do not use Cube, `cube_semantic`, `cube_query`, or any MCP.
+4. Do not use Cube, `cube_semantic`, `cube_query`, or any data-access MCP. The only permitted MCP is `decimal_calculator.calculate`, for arithmetic over values already retrieved from `direct_postgres`; it cannot provide or change data.
 5. Do not use any Contoso business skill or undocumented business-policy rule.
 6. Do not invent values when the query fails or the schema is insufficient.
 7. Report the data route and relevant assumptions in the answer.

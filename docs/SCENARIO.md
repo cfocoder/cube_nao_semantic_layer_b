@@ -20,4 +20,4 @@ OPENAI_API_KEY / OPENAI_BASE_URL
 OPENROUTER_API_KEY / OPENROUTER_BASE_URL
 ```
 
-The PostgreSQL user must be read-only and limited to the `retail` schema. Do not configure `CUBE_API_URL`, `CUBE_API_SECRET`, or a Cube MCP in this project.
+The PostgreSQL user must be read-only and limited to the `retail` schema. Do not configure `CUBE_API_URL`, `CUBE_API_SECRET`, or a Cube MCP in this project. The shared `decimal_calculator.calculate` MCP is allowed only for exact arithmetic over values obtained via `direct_postgres`; it has no data access.
